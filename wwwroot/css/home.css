@@ -1,0 +1,38 @@
+﻿body {
+  background-color: #f9faf9;
+}
+body .login {
+  width: 300px;
+  height: 300px;
+  margin: 20px auto 20px auto;
+}
+body .login > div:first-child div {
+  display: block;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  padding-top: 8px;
+  margin: 30px auto 20px auto;
+}
+body .login > div:first-child span {
+  display: block;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+body .login section {
+  background-color: #fff;
+  border: 1px solid #d1cdcd;
+  border-radius: 5px;
+  padding: 10px;
+}
+body .login .create-link {
+  border: 1px solid #d1cdcd;
+  border-radius: 5px;
+  padding: 10px;
+  height: 50px;
+  margin-top: 20px;
+  text-align: center;
+}

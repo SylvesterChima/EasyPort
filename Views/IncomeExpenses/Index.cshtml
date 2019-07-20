@@ -1,0 +1,141 @@
+﻿@model IEnumerable<EasyPort.Models.EasyPortData.IncomeExpenses>
+
+@{
+    ViewData["Title"] = "Index";
+    DateTime s = ViewBag.sDate;
+    DateTime e = ViewBag.eDate;
+}
+
+<div class="row title-container">
+    <div class="col">
+        <h5>Income/Expenses Reports</h5>
+    </div>
+    <div class="col">
+        <div class="search-text" style="float: right;">
+            <form method="post" action="/DailySales/Index">
+                <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+                <input type="hidden" id="eDate" name="eDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+                <div class="input-con">
+                    <div id="reportrange" style="cursor: pointer; padding-top: 3px; font-size: 13px;">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span> <i class="fa fa-caret-down"></i>
+                    </div>
+                    <button type="submit">Get Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="table100 ver5 m-b-110">
+    <table data-vertable="ver5">
+        <thead>
+            <tr class="row100 head">
+                <th class="column100 column1" data-column="column1"></th>
+                <th class="column100 column2" data-column="column2">Amount</th>
+                <th class="column100 column3" data-column="column3">Income/Expenses</th>
+                <th class="column100 column5" data-column="column5">Transaction Date</th>
+                <th class="column100 column6" data-column="column6">Date Uploaded</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="row100">
+                    <td class="column100 column1" data-column="column1">@item.Purpose</td>
+                    <td class="column100 column2" data-column="column2">@item.Amount.ToString("n2")</td>
+                    <td class="column100 column3" data-column="column3">@(item.IsIncome?"Income":"Expnses")</td>
+                    <td class="column100 column5" data-column="column5">@item.Date.ToString("MMM dd, yyyy")</td>
+                    <td class="column100 column6" data-column="column6">@item.EntryDate.ToString("MMM dd, yyyy")</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var start = moment('@s',"DD/MM/YYYY"); //moment();//.subtract(29, 'days');
+            var end = moment('@e', "DD/MM/YYYY"); //moment();
+
+            function cb(start, end) {
+                //alert(start);
+                $('#sDate').val(start.format('DD/MM/YYYY'));
+                $('#eDate').val(end.format('DD/MM/YYYY'));
+                $('#reportrange span').html(start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                opens: 'left',
+                autoApply: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+        });
+    </script>
+}
+
+
+
+
+
+<table class="table">
+    <thead>
+        
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purpose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Address)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IncomeExpensesId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IncomeExpensesId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IncomeExpensesId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

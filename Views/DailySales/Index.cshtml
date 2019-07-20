@@ -1,0 +1,97 @@
+﻿@model IEnumerable<EasyPort.Models.EasyPortData.DailySales>
+
+@{
+    ViewData["Title"] = "Index";
+    DateTime s = ViewBag.sDate;
+    DateTime e = ViewBag.eDate;
+}
+
+<div class="row title-container">
+    <div class="col">
+        <h5>Daily Reports</h5>
+    </div>
+    <div class="col">
+        <div class="search-text" style="float: right;">
+            <form method="post" action="/DailySales/Index">
+                <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+                <input type="hidden" id="eDate" name="eDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+                <div class="input-con">
+                    <div id="reportrange" style="cursor: pointer; padding-top: 3px; font-size: 13px;">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span> <i class="fa fa-caret-down"></i>
+                    </div>
+                    <button type="submit">Get Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="table100 ver3 m-b-110">
+    <table data-vertable="ver3">
+        <thead>
+            <tr class="row100 head">
+                <th class="column100 column1" data-column="column1"></th>
+                <th class="column100 column2" data-column="column2">Quntity Sold</th>
+                <th class="column100 column3" data-column="column3">Total Cost</th>
+                <th class="column100 column4" data-column="column4">Total Amount</th>
+                <th class="column100 column5" data-column="column5">Date Sold</th>
+                <th class="column100 column6" data-column="column6">Date Uploaded</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="row100">
+                    <td class="column100 column1" data-column="column1">@item.ProductName</td>
+                    <td class="column100 column2" data-column="column2">@item.Quntity</td>
+                    <td class="column100 column3" data-column="column3">@item.TotalCost.ToString("n2")</td>
+                    <td class="column100 column4" data-column="column4">@item.TotalAmount.ToString("n2")</td>
+                    <td class="column100 column5" data-column="column5">@item.DateSold.ToString("MMM dd, yyyy")</td>
+                    <td class="column100 column6" data-column="column6">@item.EntryDate.ToString("MMM dd, yyyy")</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var start = moment('@s',"DD/MM/YYYY"); //moment();//.subtract(29, 'days');
+            var end = moment('@e', "DD/MM/YYYY"); //moment();
+
+            function cb(start, end) {
+                //alert(start);
+                $('#sDate').val(start.format('DD/MM/YYYY'));
+                $('#eDate').val(end.format('DD/MM/YYYY'));
+                $('#reportrange span').html(start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                opens: 'left',
+                autoApply: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+        });
+    </script>
+}
