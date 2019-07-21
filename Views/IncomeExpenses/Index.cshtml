@@ -1,9 +1,39 @@
-﻿@model IEnumerable<EasyPort.Models.EasyPortData.IncomeExpenses>
+﻿@*@model IEnumerable<EasyPort.Models.EasyPortData.IncomeExpenses>*@
+@model IEnumerable<IGrouping<string, EasyPort.Models.EasyPortData.IncomeExpenses>>
 
 @{
     ViewData["Title"] = "Index";
     DateTime s = ViewBag.sDate;
     DateTime e = ViewBag.eDate;
+    decimal totalIncome = 0;
+    decimal totalExpenses = 0;
+    decimal totalOwing = 0;
+    decimal totalPaid = 0;
+    decimal totalCost = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        if (item.Key.ToUpper() == "INCOME")
+        {
+            totalIncome = item.Sum(c => c.Amount);
+            totalCost = item.Sum(c => c.TotalCost);
+        }
+        else if (item.Key.ToUpper() == "EXPENSES")
+        {
+            totalExpenses = item.Sum(c => c.Amount);
+        }
+        else if (item.Key.ToUpper() == "OWING")
+        {
+            totalOwing = item.Sum(c => c.Amount);
+        }
+        else if (item.Key.ToUpper() == "PAYMENT")
+        {
+            totalPaid = item.Sum(c => c.Amount);
+        }
+    }
 }
 
 <div class="row title-container">
@@ -26,29 +56,46 @@
         </div>
     </div>
 </div>
-
+<h3 class="text-center m-4">@ViewBag.Period</h3>
 <div class="table100 ver5 m-b-110">
     <table data-vertable="ver5">
         <thead>
             <tr class="row100 head">
                 <th class="column100 column1" data-column="column1"></th>
                 <th class="column100 column2" data-column="column2">Amount</th>
-                <th class="column100 column3" data-column="column3">Income/Expenses</th>
+                <th class="column100 column3" data-column="column3">Cost</th>
+                <th class="column100 column4" data-column="column4">Income/Expenses</th>
                 <th class="column100 column5" data-column="column5">Transaction Date</th>
                 <th class="column100 column6" data-column="column6">Date Uploaded</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach (var item in Model)
+            @if (Model.Count() > 0)
             {
-                <tr class="row100">
-                    <td class="column100 column1" data-column="column1">@item.Purpose</td>
-                    <td class="column100 column2" data-column="column2">@item.Amount.ToString("n2")</td>
-                    <td class="column100 column3" data-column="column3">@(item.IsIncome?"Income":"Expnses")</td>
-                    <td class="column100 column5" data-column="column5">@item.Date.ToString("MMM dd, yyyy")</td>
-                    <td class="column100 column6" data-column="column6">@item.EntryDate.ToString("MMM dd, yyyy")</td>
-                </tr>
+                foreach (var item in Model)
+                {
+                    <tr class="row100">
+                        <td colspan="20" class="text-center"><b>@item.Key.ToUpper()</b></td>
+                    </tr>
+                    foreach (var itm in item.ToList())
+                    {
+                    <tr class="row100">
+                        <td class="column100 column1" data-column="column1">@itm.Purpose</td>
+                        <td class="column100 column2" data-column="column2">@itm.Amount.ToString("n2")</td>
+                        <td class="column100 column3" data-column="column3">@itm.TotalCost.ToString("n2")</td>
+                        <td class="column100 column4" data-column="column4">@(itm.IsIncome ? "Income" : "Expnses")</td>
+                        <td class="column100 column5" data-column="column5">@itm.Date.ToString("MMM dd, yyyy")</td>
+                        <td class="column100 column6" data-column="column6">@itm.EntryDate.ToString("MMM dd, yyyy")</td>
+                    </tr>
+                    }
+
+                }
+                    <tr class="row100">
+                        <td class="column100 column7" data-column="column7">Total</td>
+                        <td colspan="2" class="column100 column8" data-column="column8">@((totalIncome + totalExpenses).ToString("n2"))</td>
+                        <td colspan="3" class="column100 column8" data-column="column98">@totalCost.ToString("n2")</td>
+                    </tr>
             }
 
 
@@ -97,45 +144,3 @@
 
 
 
-
-<table class="table">
-    <thead>
-        
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BatchNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsIncome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TransactionType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Purpose)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EntryDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Company.Address)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IncomeExpensesId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IncomeExpensesId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IncomeExpensesId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

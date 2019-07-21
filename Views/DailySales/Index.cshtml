@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EasyPort.Models.EasyPortData.DailySales>
+﻿@model IEnumerable<EasyPort.Models.DailySalesModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -26,17 +26,15 @@
         </div>
     </div>
 </div>
-
+<h3 class="text-center m-4">@ViewBag.Period</h3>
 <div class="table100 ver3 m-b-110">
     <table data-vertable="ver3">
         <thead>
             <tr class="row100 head">
                 <th class="column100 column1" data-column="column1"></th>
-                <th class="column100 column2" data-column="column2">Quntity Sold</th>
+                <th class="column100 column2" data-column="column2">Qty Sold</th>
                 <th class="column100 column3" data-column="column3">Total Cost</th>
                 <th class="column100 column4" data-column="column4">Total Amount</th>
-                <th class="column100 column5" data-column="column5">Date Sold</th>
-                <th class="column100 column6" data-column="column6">Date Uploaded</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +46,8 @@
                     <td class="column100 column2" data-column="column2">@item.Quntity</td>
                     <td class="column100 column3" data-column="column3">@item.TotalCost.ToString("n2")</td>
                     <td class="column100 column4" data-column="column4">@item.TotalAmount.ToString("n2")</td>
-                    <td class="column100 column5" data-column="column5">@item.DateSold.ToString("MMM dd, yyyy")</td>
-                    <td class="column100 column6" data-column="column6">@item.EntryDate.ToString("MMM dd, yyyy")</td>
                 </tr>
             }
-
 
         </tbody>
     </table>

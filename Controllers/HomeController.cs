@@ -14,7 +14,7 @@ namespace EasyPort.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Reports");
+                return RedirectToAction("Index", "DailySales");
             }
             else
             {
