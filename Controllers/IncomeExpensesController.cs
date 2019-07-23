@@ -19,6 +19,7 @@ namespace EasyPort.Controllers
             _incomeExpenses = incomeExpenses;
             _asp = asp;
         }
+
         public IActionResult Index()
         {
             ViewBag.sDate = DateTime.Now.Date;

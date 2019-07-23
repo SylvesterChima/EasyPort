@@ -18,20 +18,20 @@
     {
         if (item.Key.ToUpper() == "INCOME")
         {
-            totalIncome = item.Sum(c => c.Amount);
-            totalCost = item.Sum(c => c.TotalCost);
+            totalIncome += item.Sum(c => c.Amount);
+            totalCost += item.Sum(c => c.TotalCost);
         }
         else if (item.Key.ToUpper() == "EXPENSES")
         {
-            totalExpenses = item.Sum(c => c.Amount);
+            totalExpenses += item.Sum(c => c.Amount);
         }
         else if (item.Key.ToUpper() == "OWING")
         {
-            totalOwing = item.Sum(c => c.Amount);
+            totalOwing += item.Sum(c => c.Amount);
         }
         else if (item.Key.ToUpper() == "PAYMENT")
         {
-            totalPaid = item.Sum(c => c.Amount);
+            totalPaid += item.Sum(c => c.Amount);
         }
     }
 }
@@ -42,7 +42,7 @@
     </div>
     <div class="col">
         <div class="search-text" style="float: right;">
-            <form method="post" action="/DailySales/Index">
+            <form method="post" action="/IncomeExpenses/Index">
                 <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
                 <input type="hidden" id="eDate" name="eDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
                 <div class="input-con">
@@ -56,7 +56,31 @@
         </div>
     </div>
 </div>
-<h3 class="text-center m-4">@ViewBag.Period</h3>
+
+<div class="row">
+    <div class="col-sm-4">
+        <h6>@ViewBag.Period</h6>
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <dl class="col row" style="font-size: 14px;">
+                <dt class="col-sm-6">Total Income: </dt>
+                <dd class="col-sm-6">@totalIncome.ToString("n2")</dd>
+                <dt class="col-sm-6">Total Cost: </dt>
+                <dd class="col-sm-6">@totalCost.ToString("n2")</dd>
+                <dt class="col-sm-6">Total Expenses: </dt>
+                <dd class="col-sm-6">@totalExpenses.ToString("n2")</dd>
+            </dl>
+            <dl class="col row" style="font-size: 14px;">
+                <dt class="col-sm-6">Total Owing: </dt>
+                <dd class="col-sm-6">@totalOwing.ToString("n2")</dd>
+                <dt class="col-sm-6">Total Owing Payment: </dt>
+                <dd class="col-sm-6">@totalPaid.ToString("n2")</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
 <div class="table100 ver5 m-b-110">
     <table data-vertable="ver5">
         <thead>
@@ -64,7 +88,6 @@
                 <th class="column100 column1" data-column="column1"></th>
                 <th class="column100 column2" data-column="column2">Amount</th>
                 <th class="column100 column3" data-column="column3">Cost</th>
-                <th class="column100 column4" data-column="column4">Income/Expenses</th>
                 <th class="column100 column5" data-column="column5">Transaction Date</th>
                 <th class="column100 column6" data-column="column6">Date Uploaded</th>
             </tr>
@@ -84,18 +107,17 @@
                         <td class="column100 column1" data-column="column1">@itm.Purpose</td>
                         <td class="column100 column2" data-column="column2">@itm.Amount.ToString("n2")</td>
                         <td class="column100 column3" data-column="column3">@itm.TotalCost.ToString("n2")</td>
-                        <td class="column100 column4" data-column="column4">@(itm.IsIncome ? "Income" : "Expnses")</td>
                         <td class="column100 column5" data-column="column5">@itm.Date.ToString("MMM dd, yyyy")</td>
                         <td class="column100 column6" data-column="column6">@itm.EntryDate.ToString("MMM dd, yyyy")</td>
                     </tr>
                     }
 
                 }
-                    <tr class="row100">
-                        <td class="column100 column7" data-column="column7">Total</td>
-                        <td colspan="2" class="column100 column8" data-column="column8">@((totalIncome + totalExpenses).ToString("n2"))</td>
-                        <td colspan="3" class="column100 column8" data-column="column98">@totalCost.ToString("n2")</td>
-                    </tr>
+                    @*<tr class="row100">
+                        <td class="column100 column7" data-column="column7"><b>Total</b></td>
+                        <td colspan="1" class="column100 column8" data-column="column8"><b>@((totalIncome + totalExpenses).ToString("n2"))</b></td>
+                        <td colspan="2" class="column100 column8" data-column="column98"><b>@totalCost.ToString("n2")</b></td>
+                    </tr>*@
             }
 
 

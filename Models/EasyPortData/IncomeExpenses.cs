@@ -9,7 +9,7 @@ namespace EasyPort.Models.EasyPortData
     {
         public int IncomeExpensesId { get; set; }
         public int CompanyId { get; set; }
-        public int BatchNo { get; set; }
+        public long BatchNo { get; set; }
         public decimal TotalCost { get; set; }
         public decimal Amount { get; set; }
         public bool IsIncome { get; set; }
