@@ -37,10 +37,10 @@
 }
 
 <div class="row title-container">
-    <div class="col">
-        <h5>Income/Expenses Reports</h5>
+    <div class="col-md-5">
+        <h5 class="mb-3">Income/Expenses Reports</h5>
     </div>
-    <div class="col">
+    <div class="col-md-7">
         <div class="search-text" style="float: right;">
             <form method="post" action="/IncomeExpenses/Index">
                 <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
@@ -59,7 +59,7 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <h6>@ViewBag.Period</h6>
+        <h6 class="mb-4">@ViewBag.Period</h6>
     </div>
     <div class="col-sm-8">
         <div class="row">
