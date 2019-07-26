@@ -263,7 +263,7 @@ namespace EasyPort.Models.EasyPortData
             }
             catch (Exception x)
             {
-                throw;
+                throw x;
             }
         }
     }
