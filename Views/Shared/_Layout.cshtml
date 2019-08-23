@@ -11,75 +11,108 @@
     <link href="~/css/daterangepicker.css" rel="stylesheet" />
     <link href="~/animate/animate.css" rel="stylesheet" />
     <link href="~/select2/select2.css" rel="stylesheet" />
-    <link href="~/table/util.css" rel="stylesheet" />
-    <link href="~/table/main.css" rel="stylesheet" />
+    @*<link href="~/table/util.css" rel="stylesheet" />
+    <link href="~/table/main.css" rel="stylesheet" />*@
 
     @*<environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
-        <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
-        <link href="~/lib/font-awesome/css/regular.css" rel="stylesheet" />
-        <link href="~/css/daterangepicker.css" rel="stylesheet" />
-        <link href="~/animate/animate.css" rel="stylesheet" />
-        <link href="~/select2/select2.css" rel="stylesheet" />
-        <link href="~/table/util.css" rel="stylesheet" />
-        <link href="~/table/main.css" rel="stylesheet" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>*@
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
+            <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+            <link href="~/lib/font-awesome/css/regular.css" rel="stylesheet" />
+            <link href="~/css/daterangepicker.css" rel="stylesheet" />
+            <link href="~/animate/animate.css" rel="stylesheet" />
+            <link href="~/select2/select2.css" rel="stylesheet" />
+            <link href="~/table/util.css" rel="stylesheet" />
+            <link href="~/table/main.css" rel="stylesheet" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+                  crossorigin="anonymous"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        </environment>*@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/main.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" href="#">RecsHub</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DailySales" asp-action="Index">Daily Sales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="IncomeExpenses" asp-action="Index">Income/Expenses</a>
-                        </li>
-                    </ul>
-                </div>
+
+<div class="top-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h4 class="navbar-brand text-white">RecsHub</h4>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - Recshub.com
+            <div class="col">
+                <ul class="menu">
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="~/lib/font-awesome/js/all.js"></script>
-    <script src="~/lib/font-awesome/js/fontawesome.js"></script>
-    <script src="~/js/moment.min.js"></script>
-    <script src="~/js/daterangepicker.js"></script>
-    <script src="~/select2/select2.js"></script>
-    <script src="~/js/main.js"></script>
+    </div>
+</div>
+<div class="side-bar">
 
-    @*<environment include="Development">
+</div>
+<div class="main-container">
+    @RenderBody()
+</div>
+
+
+
+
+
+
+
+@*<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">RecsHub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial"/>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="DailySales" asp-action="Index">Daily Sales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="IncomeExpenses" asp-action="Index">Income/Expenses</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <partial name="_CookieConsentPartial"/>
+    <main role="main">
+        
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2019 - Recshub.com
+    </div>
+</footer>*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="~/lib/font-awesome/js/all.js"></script>
+<script src="~/lib/font-awesome/js/fontawesome.js"></script>
+<script src="~/js/moment.min.js"></script>
+<script src="~/js/daterangepicker.js"></script>
+<script src="~/select2/select2.js"></script>
+@*<script src="~/js/main.js"></script>*@
+
+@*<environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script src="~/lib/font-awesome/js/all.js"></script>
@@ -103,8 +136,8 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>*@
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 </html>
