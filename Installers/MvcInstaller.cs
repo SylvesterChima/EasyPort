@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using EasyPort.Data;
+using EasyPort.Messages;
 using EasyPort.Models.Abstract;
 using EasyPort.Models.Contract;
 using EasyPort.ObjectMapper;
@@ -29,6 +30,7 @@ namespace EasyPort.Installers
             services.AddScoped<IAspNetUserRepository, EFAspNetUserRepository>();
             services.AddScoped<IDailySalesRepository, EFDailySalesRepository>();
             services.AddScoped<IIncomeExpensesRepository, EFIncomeExpensesRepositroy>();
+            services.AddTransient<IMessageService, MessageService>();
 
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageFiles")));
 

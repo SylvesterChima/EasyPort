@@ -12,6 +12,54 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\assets\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets\css\paper-dashboard.css.map" />
+    <None Include="wwwroot\assets\demo\demo.js" />
+    <None Include="wwwroot\assets\fonts\nucleo-icons.woff2" />
+    <None Include="wwwroot\assets\js\core\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\core\jquery.min.js" />
+    <None Include="wwwroot\assets\js\core\popper.min.js" />
+    <None Include="wwwroot\assets\js\paper-dashboard.js" />
+    <None Include="wwwroot\assets\js\paper-dashboard.js.map" />
+    <None Include="wwwroot\assets\js\paper-dashboard.min.js" />
+    <None Include="wwwroot\assets\js\plugins\bootstrap-notify.js" />
+    <None Include="wwwroot\assets\js\plugins\chartjs.min.js" />
+    <None Include="wwwroot\assets\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\assets\scss\paper-dashboard.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\cards\_card-chart.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\cards\_card-map.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\cards\_card-plain.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\cards\_card-stats.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\cards\_card-user.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_buttons.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_cards.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_dropdown.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_inputs.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_page-header.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_transparency.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\mixins\_vendor-prefixes.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\plugins\_plugin-animate-bootstrap-notify.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\plugins\_plugin-perfect-scrollbar.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_alerts.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_animated-buttons.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_buttons.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_cards.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_checkboxes-radio.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_dropdown.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_fixed-plugin.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_footers.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_images.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_inputs.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_misc.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_mixins.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_navbar.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_nucleo-outline.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_page-header.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_responsive.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_sidebar-and-main-panel.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_tables.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_typography.scss" />
+    <None Include="wwwroot\assets\scss\paper-dashboard\_variables.scss" />
   </ItemGroup>
 
 
@@ -19,6 +67,7 @@
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
+    <PackageReference Include="MailKit" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />

@@ -8,7 +8,7 @@ body .title-container {
   margin-bottom: 10px;
 }
     body .search-text {
-        border: 1px solid #781957;
+        border: 1px solid #ef8157;
         height: 35px;
         width: 100%;
         max-width: 350px;
@@ -38,7 +38,7 @@ body .search-text form .input-con input:active {
 }
     body .search-text form .input-con button {
         display: inline-block;
-        background-color: #781957;
+        background-color: #ef8157;
         color: #fff;
         height: 100%;
         position: absolute;

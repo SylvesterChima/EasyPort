@@ -1,69 +1,74 @@
 ﻿@model IEnumerable<EasyPort.Models.DailySalesModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Daily Reports";
     DateTime s = ViewBag.sDate;
     DateTime e = ViewBag.eDate;
 }
 
-<div class="row title-container">
-    <div class="col-md-5">
-        <h5 class="mb-3">Daily Reports</h5>
-    </div>
-    <div class="col-md-7">
-        <div class="search-text" style="float: right;">
-            <form method="post" action="/DailySales/Index">
-                <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
-                <input type="hidden" id="eDate" name="eDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
-                <div class="input-con">
-                    <div id="reportrange" style="cursor: pointer; padding-top: 3px; font-size: 13px;">
-                        <i class="fa fa-calendar"></i>&nbsp;
-                        <span></span> <i class="fa fa-caret-down"></i>
-                    </div>
-                    <button type="submit">Get Record</button>
+@section filter{ 
+    <div class="search-text" style="float: right;">
+        <form method="post" action="/DailySales/Index">
+            <input type="hidden" id="sDate" name="sDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+            <input type="hidden" id="eDate" name="eDate" value="@DateTime.UtcNow.ToString("dd/MM/yyyy")" />
+            <div class="input-con">
+                <div id="reportrange" style="cursor: pointer; padding-top: 3px; font-size: 13px;">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
                 </div>
-            </form>
+                <button type="submit">Get Record</button>
+            </div>
+        </form>
+    </div>
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">@ViewBag.Period</h4>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="table-responsiv">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty Sold</th>
+                            <th>Total Cost</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        decimal TC = 0;
+                        decimal TA = 0;
+
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quntity</td>
+                                <td>@item.TotalCost.ToString("n2")</td>
+                                <td>@item.TotalAmount.ToString("n2")</td>
+                            </tr>
+                            TC += item.TotalCost;
+                            TA += item.TotalAmount;
+                        }
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td><b>@TC.ToString("n2")</b></td>
+                            <td><b>@TA.ToString("n2")</b></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-<h3 class="text-center m-4">@ViewBag.Period</h3>
-<div class="table100 ver3 m-b-110 mt-5">
-    <table class="table" data-vertable="ver3">
-        <thead>
-            <tr class="row100 head">
-                <th class="column100 column1" data-column="column1"></th>
-                <th class="column100 column2" data-column="column2">Qty Sold</th>
-                <th class="column100 column3" data-column="column3">Total Cost</th>
-                <th class="column100 column4" data-column="column4">Total Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Count() > 0)
-            {
-                decimal TC = 0;
-                decimal TA = 0;
-
-                foreach (var item in Model)
-                {
-                    <tr class="row100">
-                        <td class="column100 column1" data-column="column1">@item.ProductName</td>
-                        <td class="column100 column2" data-column="column2">@item.Quntity</td>
-                        <td class="column100 column3" data-column="column3">@item.TotalCost.ToString("n2")</td>
-                        <td class="column100 column4" data-column="column4">@item.TotalAmount.ToString("n2")</td>
-                    </tr>
-                    TC += item.TotalCost;
-                    TA += item.TotalAmount;
-                }
-                <tr class="row100">
-                    <td colspan="2" class="column100 column6" data-column="column6"><b>Total</b></td>
-                    <td class="column100 column7" data-column="column7"><b>@TC.ToString("n2")</b></td>
-                    <td class="column100 column8" data-column="column8"><b>@TA.ToString("n2")</b></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
 
 
 
